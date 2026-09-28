@@ -1,0 +1,40 @@
+{
+  "name": "opencode-ollama",
+  "version": "1.0.0",
+  "description": "OpenCode plugin that auto-discovers installed models from an Ollama server",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/opencode-ollama.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/opencode-ollama.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rimraf dist && tsc --noEmit && esbuild src/index.ts --bundle --platform=node --format=esm --target=node20 --outfile=dist/opencode-ollama.js && tsc --declaration --emitDeclarationOnly --outDir dist",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test": "vitest src",
+    "test:run": "vitest run src",
+    "prepublishOnly": "npm run lint && npm run test:run && npm run build"
+  },
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.18.25"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.28.2",
+    "eslint": "^10.4.0",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.5.0",
+    "typescript-eslint": "^8.59.4",
+    "vitest": "^4.1.11"
+  }
+}
